@@ -84,10 +84,6 @@
             <span class="btn-icon">🔄</span>
             Actualizar
           </button>
-          <button @click="exportToCSV" class="btn-secondary" :disabled="couriers.length === 0">
-            <span class="btn-icon">📊</span>
-            Exportar CSV
-          </button>
         </div>
       </div>
 
@@ -99,8 +95,6 @@
             <th>Contacto</th>
             <th>Vehículo</th>
             <th>Estado</th>
-            <th>Carga</th>
-            <th>Rendimiento</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -135,24 +129,7 @@
                 {{ statusText(courier.status) }}
               </span>
             </td>
-            <td class="load-info">
-              <div class="load-bar">
-                <div class="load-fill" :style="{ width: `${(courier.current_load / courier.max_capacity) * 100}%` }"></div>
-                <span class="load-text">{{ courier.current_load }}/{{ courier.max_capacity }}</span>
-              </div>
-            </td>
-            <td class="performance-info">
-              <div class="performance-stats">
-                <div class="stat">
-                  <span class="stat-value">{{ courier.performance.completed_today }}</span>
-                  <span class="stat-label">hoy</span>
-                </div>
-                <div class="stat">
-                  <span class="stat-value">{{ courier.performance.completion_rate }}%</span>
-                  <span class="stat-label">éxito</span>
-                </div>
-              </div>
-            </td>
+           
             <td class="actions">
               <div class="action-buttons">
                 <button @click="viewCourier(courier)" class="btn-icon" title="Ver detalles">
@@ -161,15 +138,19 @@
                 <button @click="editCourier(courier)" class="btn-icon" title="Editar">
                   ✏️
                 </button>
-                <button @click="toggleActive(courier)"
+
+                <!-- Button de desactivar -->
+                <!-- <button @click="toggleActive(courier)"
                         :class="`btn-icon ${courier.is_active ? 'btn-warning' : 'btn-success'}`"
                         :title="courier.is_active ? 'Desactivar' : 'Activar'">
                   {{ courier.is_active ? '⏸️' : '▶️' }}
-                </button>
-                <button @click="showOnMap(courier)" class="btn-icon" title="Ver en mapa"
+                </button> -->
+               
+                <!-- Mapas -->
+                <!-- <button @click="showOnMap(courier)" class="btn-icon" title="Ver en mapa"
                         :disabled="!courier.last_location_update">
                   🗺️
-                </button>
+                </button> -->
               </div>
             </td>
           </tr>

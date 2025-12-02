@@ -44,8 +44,7 @@
           :disabled="loading || !email || !password"
         >
           <span v-if="loading" class="loading-spinner"></span>
-          <span v-else>🚀 Iniciar Sesión</span>
-          {{ loading ? 'Iniciando sesión...' : 'Iniciar Sesión' }}
+          <span v-else> Iniciar Sesión</span>
         </button>
 
         <div v-if="error" class="error-message">
@@ -54,13 +53,6 @@
         </div>
       </form>
 
-      <!-- <div class="login-footer">
-        <p class="demo-accounts">
-          <strong>Cuentas de demostración:</strong><br>
-          👨‍💼 Admin: admin@example.com / 12345678<br>
-          🏍️ Mensajero: courier@example.com / 12345678
-        </p>
-      </div> -->
     </div>
 
     <div class="background-shapes">
@@ -81,12 +73,6 @@ const email = ref("");
 const password = ref("");
 const error = ref("");
 const loading = ref(false);
-
-// Para desarrollo/demo - autocompletar credenciales
-const demoAccounts = {
-  admin: { email: 'admin@example.com', password: '12345678' },
-  courier: { email: 'courier@example.com', password: '12345678' }
-};
 
 const canSubmit = computed(() => {
   return email.value && password.value && !loading.value;

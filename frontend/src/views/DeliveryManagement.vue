@@ -81,9 +81,6 @@
       <div class="table-header">
         <h3>Lista de Entregas ({{ deliveries.length }})</h3>
         <div class="table-actions">
-          <button @click="exportToCSV" class="btn-secondary" :disabled="deliveries.length === 0">
-            📊 Exportar CSV
-          </button>
           <button @click="loadDeliveries" class="btn-secondary">
             🔄 Actualizar
           </button>

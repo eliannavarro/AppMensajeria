@@ -75,10 +75,13 @@
             <span class="btn-icon">🔄</span>
             Actualizar
           </button>
-          <button @click="exportToCSV" class="btn-secondary" :disabled="users.length === 0">
+
+          <!-- Exportar CSV -->
+            <!-- <button @click="exportToCSV" class="btn-secondary" :disabled="users.length === 0">
             <span class="btn-icon">📊</span>
             Exportar CSV
-          </button>
+          </button> -->
+          
         </div>
       </div>
 
@@ -155,17 +158,18 @@
                 <button @click="editUser(user)" class="btn-icon" title="Editar">
                   ✏️
                 </button>
-                <button @click="toggleActive(user)"
-                        :class="`btn-icon ${user.is_active ? 'btn-warning' : 'btn-success'}`"
-                        :title="user.is_active ? 'Desactivar' : 'Activar'">
-                  {{ user.is_active ? '⏸️' : '▶️' }}
-                </button>
+
+                <!-- button de eliminacion -->
+               
                 <button v-if="!user.courier && user.role !== 'admin'"
                         @click="convertToCourier(user)"
                         class="btn-icon btn-info"
                         title="Convertir a mensajero">
                   🏍️
                 </button>
+
+                <!-- Acción de eliminar -->
+                
               </div>
             </td>
           </tr>
