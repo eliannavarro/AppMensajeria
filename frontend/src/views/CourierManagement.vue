@@ -199,10 +199,16 @@
                 <input v-model="form.phone" type="tel" required
                        placeholder="+57 300 123 4567" />
               </div>
+
               <div class="form-group" v-if="!editingCourier">
                 <label>Contraseña *</label>
                 <input v-model="form.password" type="password" required
                        minlength="8" placeholder="Mínimo 8 caracteres" />
+                <div class="form-group" v-if="!editingUser">
+                <label>Confirmar contraseña *</label>
+                <input v-model="form.password_confirmation" type="password" required
+                       placeholder="Repite la contraseña" />
+              </div>
               </div>
             </div>
           </div>
