@@ -209,9 +209,9 @@ class CourierController extends Controller
             return [
                 'id' => $courier->id,
                 'user' => [
-                    'id' => $courier->user->id,
-                    'name' => $courier->user->name,
-                    'email' => $courier->user->email,
+                'id' => $courier->user->id,
+                'name' => $courier->user->name,
+                'email' => $courier->user->email,
                 ],
                 'phone' => $courier->phone,
                 'vehicle_type' => $courier->vehicle_type,
