@@ -65,12 +65,10 @@
 
         <div v-if="showUserMenu" class="user-menu-dropdown">
           <router-link to="/profile" class="dropdown-item" @click="showUserMenu = false">
-            <span class="dropdown-icon">👤</span>
-            Mi Perfil
+            <span class="dropdown-icon">👤</span>Mi Perfil
           </router-link>
           <button @click="logout" class="dropdown-item logout-btn">
-            <span class="dropdown-icon">🚪</span>
-            Cerrar Sesión
+            <span class="dropdown-icon">🚪</span>Cerrar Sesión
           </button>
         </div>
       </div>
@@ -306,6 +304,7 @@ const logout = async () => {
 }
 
 .user-menu-dropdown {
+  
   position: absolute;
   top: 100%;
   right: 0;
@@ -315,7 +314,7 @@ const logout = async () => {
   min-width: 180px;
   padding: 0.5rem;
   margin-top: 0.5rem;
-  z-index: 1001;
+  z-index: 1011;
   animation: dropdownFade 0.2s ease;
 }
 

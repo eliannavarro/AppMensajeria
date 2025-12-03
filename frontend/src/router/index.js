@@ -7,6 +7,7 @@ import CourierManagement from "@/views/CourierManagement.vue";
 import CourierDashboard from "@/views/CourierDashboard.vue";
 import CourierTracker from "@/views/CourierTracker.vue";
 import DeliveryManagement from "@/views/DeliveryManagement.vue";
+import ProfileView from "@/views/ProfileView.vue";
 
 const routes = [
   {
@@ -52,6 +53,12 @@ const routes = [
     component: DeliveryManagement,
     meta: { requiresAuth: true, title: 'Gestión de Entregas' },
   },
+  {
+  path: "/profile",
+  component: ProfileView,
+  meta: { requiresAuth: true, title: "Mi Perfil" }
+  },
+
 ];
 
 const router = createRouter({
