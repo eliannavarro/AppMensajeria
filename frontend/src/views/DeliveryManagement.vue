@@ -93,7 +93,7 @@
             <th>ID</th>
             <th>Cliente</th>
             <th>Dirección</th>
-            <th>Mensajero</th>
+            <!-- <th>Mensajero</th> -->
             <th>Estado</th>
             <th>Distancia</th>
             <th>Asignada</th>
@@ -101,6 +101,7 @@
           </tr>
         </thead>
         <tbody>
+        
           <tr v-for="delivery in deliveries" :key="delivery.id"
               :class="`status-${delivery.status}`">
             <td class="delivery-id">#{{ delivery.id }}</td>
@@ -108,6 +109,7 @@
               <strong>{{ delivery.customer_name }}</strong>
               <div class="customer-phone">{{ delivery.customer_phone }}</div>
             </td>
+
             <td class="delivery-address">
               {{ delivery.delivery_address }}
               <div v-if="delivery.notes" class="delivery-notes" :title="delivery.notes">

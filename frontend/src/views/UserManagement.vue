@@ -169,7 +169,9 @@
                 </button>
 
                 <!-- Acción de eliminar -->
-                
+              <button @click="deleteUser(user.id)" class="btn-icon btn-danger" title="Eliminar">
+              🗑️
+              </button>
               </div>
             </td>
           </tr>
@@ -697,6 +699,22 @@ function exportToCSV() {
   link.click();
   document.body.removeChild(link);
 }
+//eliminar
+async function deleteUser(id) {
+  if (!confirm("⚠️ ¿Seguro que deseas eliminar este usuario? Esta acción no se puede deshacer.")) {
+    return;
+  }
+
+  try {
+    await apiClient.delete(`/users/${id}`);
+    await loadUsers();
+    alert("🗑️ Usuario eliminado correctamente");
+  } catch (err) {
+    console.error("Error eliminando usuario:", err);
+    alert(err.response?.data?.message || "Error al eliminar usuario");
+  }
+}
+
 
 // Inicialización
 onMounted(() => {

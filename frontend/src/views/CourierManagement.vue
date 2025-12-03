@@ -139,6 +139,15 @@
                   ✏️
                 </button>
 
+                <!-- Button de eliminar -->
+               <button 
+               @click="deleteCourier(courier.id)" 
+               class="btn-icon btn-danger" 
+               title="Eliminar"
+               >
+               🗑️
+               </button>
+
                 <!-- Button de desactivar -->
                 <!-- <button @click="toggleActive(courier)"
                         :class="`btn-icon ${courier.is_active ? 'btn-warning' : 'btn-success'}`"
@@ -635,6 +644,22 @@ function exportToCSV() {
   link.click();
   document.body.removeChild(link);
 }
+//eliminacion de mensajero 
+async function deleteCourier(id) {
+  if (!confirm("⚠️ ¿Seguro que deseas eliminar este mensajero?")) {
+    return;
+  }
+
+  try {
+    await apiClient.delete(`/couriers/${id}`);
+    await loadCouriers(); // Recarga la tabla
+    alert("🗑️ Mensajero eliminado correctamente");
+  } catch (err) {
+    console.error("Error eliminando mensajero:", err);
+    alert(err.response?.data?.message || "Error al eliminar mensajero");
+  }
+}
+
 
 // Inicialización
 onMounted(() => {
