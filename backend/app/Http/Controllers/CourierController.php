@@ -54,9 +54,12 @@ class CourierController extends Controller
 
     public function show($id)
     {
-        $courier = Courier::with(['user', 'deliveries' => function ($query) {
-            $query->orderBy('created_at', 'desc')->limit(10);
-        }])->findOrFail($id);
+        $courier = Courier::with([
+            'user',
+            'deliveries' => function ($query) {
+                $query->orderBy('created_at', 'desc')->limit(10);
+            }
+        ])->findOrFail($id);
 
         $stats = $courier->getPerformanceStats();
 
@@ -132,8 +135,10 @@ class CourierController extends Controller
             // Actualizar usuario
             if (isset($validated['name']) || isset($validated['email'])) {
                 $userData = [];
-                if (isset($validated['name'])) $userData['name'] = $validated['name'];
-                if (isset($validated['email'])) $userData['email'] = $validated['email'];
+                if (isset($validated['name']))
+                    $userData['name'] = $validated['name'];
+                if (isset($validated['email']))
+                    $userData['email'] = $validated['email'];
 
                 $courier->user->update($userData);
             }
@@ -161,19 +166,12 @@ class CourierController extends Controller
 
     public function destroy($id)
     {
-        $courier = Courier::with('user')->findOrFail($id);
-
-        DB::transaction(function () use ($courier) {
-            // Soft delete del mensajero
-            $courier->update(['is_active' => false]);
-
-            // Opcional: también desactivar el usuario
-            $courier->user->update(['is_active' => false]);
-        });
+        $courier = Courier::findOrFail($id);
+        $courier->delete();
 
         return response()->json([
-            'message' => 'Mensajero desactivado exitosamente'
-        ]);
+            'message' => 'Mensajero eliminado exitosamente'
+        ], 200);
     }
 
     public function stats()

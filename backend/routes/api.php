@@ -16,6 +16,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Usuarios
     Route::apiResource('users', UserController::class);
     Route::get('/user', [UserController::class, 'me']); // Cambié '/users' por '/user' que es más estándar
+    Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
     // Lugares
     Route::apiResource('places', PlaceController::class);

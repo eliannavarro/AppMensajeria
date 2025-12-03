@@ -11,7 +11,8 @@ return new class extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('courier_id')->nullable()->constrained();
+            // Modificación aquí: establecer que cuando se elimine un mensajero, el campo courier_id se ponga en NULL
+            $table->foreignId('courier_id')->nullable()->constrained()->onDelete('set null');
             $table->string('customer_name');
             $table->string('customer_phone');
             $table->text('delivery_address');
@@ -35,7 +36,6 @@ return new class extends Migration
             $table->integer('priority')->default(1); // 1-5, mayor número = mayor prioridad
 
             $table->timestamps();
-
 
             // Índices para mejor performance
             $table->index(['status', 'courier_id']);

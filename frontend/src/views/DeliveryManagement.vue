@@ -81,9 +81,6 @@
       <div class="table-header">
         <h3>Lista de Entregas ({{ deliveries.length }})</h3>
         <div class="table-actions">
-          <button @click="exportToCSV" class="btn-secondary" :disabled="deliveries.length === 0">
-            📊 Exportar CSV
-          </button>
           <button @click="loadDeliveries" class="btn-secondary">
             🔄 Actualizar
           </button>
@@ -100,10 +97,11 @@
             <th>Estado</th>
             <th>Distancia</th>
             <th>Asignada</th>
-            <th>Acciones</th>
+            <th>Ver - Editar - Eliminar</th>
           </tr>
         </thead>
         <tbody>
+        
           <tr v-for="delivery in deliveries" :key="delivery.id"
               :class="`status-${delivery.status}`">
             <td class="delivery-id">#{{ delivery.id }}</td>
@@ -111,6 +109,7 @@
               <strong>{{ delivery.customer_name }}</strong>
               <div class="customer-phone">{{ delivery.customer_phone }}</div>
             </td>
+
             <td class="delivery-address">
               {{ delivery.delivery_address }}
               <div v-if="delivery.notes" class="delivery-notes" :title="delivery.notes">

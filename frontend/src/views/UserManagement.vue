@@ -75,10 +75,13 @@
             <span class="btn-icon">🔄</span>
             Actualizar
           </button>
-          <button @click="exportToCSV" class="btn-secondary" :disabled="users.length === 0">
+
+          <!-- Exportar CSV -->
+            <!-- <button @click="exportToCSV" class="btn-secondary" :disabled="users.length === 0">
             <span class="btn-icon">📊</span>
             Exportar CSV
-          </button>
+          </button> -->
+          
         </div>
       </div>
 
@@ -90,7 +93,7 @@
             <th>Información</th>
             <th>Estado</th>
             <th>Registro</th>
-            <th>Acciones</th>
+            <th>Ver - Editar - Eliminar</th>
           </tr>
         </thead>
         <tbody>
@@ -155,17 +158,20 @@
                 <button @click="editUser(user)" class="btn-icon" title="Editar">
                   ✏️
                 </button>
-                <button @click="toggleActive(user)"
-                        :class="`btn-icon ${user.is_active ? 'btn-warning' : 'btn-success'}`"
-                        :title="user.is_active ? 'Desactivar' : 'Activar'">
-                  {{ user.is_active ? '⏸️' : '▶️' }}
-                </button>
+
+                <!-- button de eliminacion -->
+               
                 <button v-if="!user.courier && user.role !== 'admin'"
                         @click="convertToCourier(user)"
                         class="btn-icon btn-info"
                         title="Convertir a mensajero">
                   🏍️
                 </button>
+
+                <!-- Acción de eliminar -->
+              <button @click="deleteUser(user.id)" class="btn-icon btn-danger" title="Eliminar">
+              🗑️
+              </button>
               </div>
             </td>
           </tr>
@@ -693,6 +699,22 @@ function exportToCSV() {
   link.click();
   document.body.removeChild(link);
 }
+//eliminar
+async function deleteUser(id) {
+  if (!confirm("⚠️ ¿Seguro que deseas eliminar este usuario? Esta acción no se puede deshacer.")) {
+    return;
+  }
+
+  try {
+    await apiClient.delete(`/users/${id}`);
+    await loadUsers();
+    alert("🗑️ Usuario eliminado correctamente");
+  } catch (err) {
+    console.error("Error eliminando usuario:", err);
+    alert(err.response?.data?.message || "Error al eliminar usuario");
+  }
+}
+
 
 // Inicialización
 onMounted(() => {
