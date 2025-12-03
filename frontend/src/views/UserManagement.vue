@@ -248,7 +248,7 @@
                     </div>
                   </div>
                 </label>
-
+<!-- 
                 <label class="role-option" :class="{ selected: form.role === 'courier' }">
                   <input
                     v-model="form.role"
@@ -262,7 +262,7 @@
                       <small>Gestión de entregas y tracking</small>
                     </div>
                   </div>
-                </label>
+                </label> -->
 
                 <label class="role-option" :class="{ selected: form.role === 'user' }">
                   <input
@@ -282,32 +282,8 @@
             </div>
           </div>
 
-          <div v-if="form.role === 'courier'" class="form-section">
-            <h4>Información del Mensajero</h4>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Teléfono *</label>
-                <input v-model="form.phone" type="tel"
-                       placeholder="+57 300 123 4567" />
-              </div>
-              <div class="form-group">
-                <label>Tipo de vehículo *</label>
-                <select v-model="form.vehicle_type">
-                  <option value="">Seleccionar tipo...</option>
-                  <option value="motocicleta">🏍️ Motocicleta</option>
-                  <option value="bicicleta">🚲 Bicicleta</option>
-                  <option value="carro">🚗 Carro</option>
-                  <option value="caminando">🚶 Caminando</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Placa (opcional)</label>
-              <input v-model="form.vehicle_plate"
-                     placeholder="Ej: ABC123" />
-            </div>
-          </div>
+          <!-- NOTA: La sección de Información del Mensajero ha sido ELIMINADA -->
+          <!-- Esta información se gestionará en otro formulario específico para mensajeros -->
 
           <div class="form-errors" v-if="Object.keys(formErrors).length > 0">
             <h4>Errores en el formulario:</h4>
@@ -448,16 +424,15 @@ const stats = ref({
   regular: 0
 });
 
-// Formulario
+// Formulario - ELIMINADOS los campos de mensajero
 const form = ref({
   name: "",
   email: "",
   password: "",
   password_confirmation: "",
-  role: "user",
-  phone: "",
-  vehicle_type: "",
-  vehicle_plate: ""
+  role: "user"
+  // NOTA: Los campos phone, vehicle_type, vehicle_plate han sido ELIMINADOS
+  // Ya no se solicitan aquí, se gestionarán en otro lugar
 });
 
 // Computed
@@ -574,10 +549,9 @@ function editUser(user) {
   form.value = {
     name: user.name,
     email: user.email,
-    role: user.role,
-    phone: user.courier?.phone || "",
-    vehicle_type: user.courier?.vehicle_type || "",
-    vehicle_plate: user.courier?.vehicle_plate || ""
+    role: user.role
+    // NOTA: Ya no incluimos los campos de mensajero aquí
+    // Esta información se gestionará en otro formulario
   };
   showCreateModal.value = true;
 }
@@ -641,6 +615,7 @@ async function convertToCourier(user) {
   try {
     await apiClient.put(`/users/${user.id}`, {
       role: 'courier'
+      // NOTA: Solo cambiamos el rol, no agregamos info de mensajero aquí
     });
 
     await loadUsers();
@@ -657,10 +632,8 @@ function resetForm() {
     email: "",
     password: "",
     password_confirmation: "",
-    role: "user",
-    phone: "",
-    vehicle_type: "",
-    vehicle_plate: ""
+    role: "user"
+    // NOTA: Ya no incluimos campos de mensajero
   };
   formErrors.value = {};
 }
@@ -714,7 +687,6 @@ async function deleteUser(id) {
     alert(err.response?.data?.message || "Error al eliminar usuario");
   }
 }
-
 
 // Inicialización
 onMounted(() => {
