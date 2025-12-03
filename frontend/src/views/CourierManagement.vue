@@ -95,7 +95,7 @@
             <th>Contacto</th>
             <th>Vehículo</th>
             <th>Estado</th>
-            <th>Ver - Editar - Eliminar</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>

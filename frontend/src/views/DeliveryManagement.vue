@@ -93,7 +93,7 @@
             <th>ID</th>
             <th>Cliente</th>
             <th>Dirección</th>
-            <th>Mensajero</th>
+            <!-- <th>Mensajero</th> -->
             <th>Estado</th>
             <th>Distancia</th>
             <th>Asignada</th>
